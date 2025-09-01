@@ -21,6 +21,7 @@ module "security_groups" {
     
     eks_cluster_sg_id = module.eks.cluster_security_group_id
     jenkins_sg_id     = module.security_groups.jenkins_sg_id
+    vpc_cidr          = module.vpc.vpc_cidr 
 }
 
 module "eks" {

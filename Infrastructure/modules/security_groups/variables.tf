@@ -10,3 +10,8 @@ variable "eks_cluster_sg_id" {
 variable "jenkins_sg_id" {
   type = string
 }
+
+variable "vpc_cidr" {
+  description = "CIDR block of the VPC"
+  type        = string
+}
