@@ -30,3 +30,14 @@ resource "aws_security_group" "jenkins_sg" {
     Name = "jenkins-sg"
   }
 }
+
+
+resource "aws_security_group_rule" "allow_jenkins_to_eks_api" {
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  security_group_id        = var.eks_cluster_sg_id
+  source_security_group_id = var.jenkins_sg_id   
+  description              = "Allow Jenkins EC2 to access EKS API"
+}
