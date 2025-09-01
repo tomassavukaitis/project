@@ -30,6 +30,7 @@ module "eks" {
   cluster_role_arn  = module.iam.eks_cluster_role_arn
   node_role_arn     = module.iam.eks_node_role_arn
   subnet_ids        = module.vpc.private_subnet_ids
+  node_security_group_id = module.security_groups.eks_node_sg_id
 }
 
 module "iam" {
