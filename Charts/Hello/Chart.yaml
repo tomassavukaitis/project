@@ -1,0 +1,5 @@
+apiVersion: v2
+name: Hello
+description: A Helm chart to deploy two pods from ECR image
+version: 0.1.0
+appVersion: "1.0"

@@ -26,6 +26,8 @@ resource "aws_subnet" "private_subnet" {
 
   tags = {
     Name = "private-subnet-${count.index}"
+    "kubernetes.io/cluster/Tomas-EKS-cluster" = "shared"
+
   }
 }
 

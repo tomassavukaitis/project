@@ -46,6 +46,31 @@ resource "aws_security_group_rule" "allow_jenkins_to_eks_api" {
   description              = "Allow Jenkins EC2 to access EKS API"
 }
 
+
+  resource "aws_security_group_rule" "allow_home_to_eks_api" {
+    type              = "ingress"
+    from_port         = 443
+    to_port           = 443
+    protocol          = "tcp"
+    security_group_id = var.eks_cluster_sg_id
+    cidr_blocks      = ["84.15.178.126/32"]
+    description       = "Allow home IP to access EKS API"
+  }
+
+
+##########################################NEW################
+
+resource "aws_security_group_rule" "allow_nodes_to_cluster_api" {
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  security_group_id        = var.eks_cluster_sg_id
+  source_security_group_id = aws_security_group.eks_node_sg.id
+  description              = "Allow EKS nodes to access cluster API"
+}
+
+
 # group for EKS worker nodes
 
 resource "aws_security_group" "eks_node_sg" {
@@ -96,6 +121,17 @@ resource "aws_security_group_rule" "from_jenkins" {
   source_security_group_id = var.jenkins_sg_id
 }
 
+resource "aws_security_group_rule" "allow_home_http_to_eks_nodes" {
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  security_group_id = aws_security_group.eks_node_sg.id
+  cidr_blocks       = ["84.15.178.126/32"]
+  description       = "Allow HTTP access from home IP to EKS nodes"
+}
+
+
 resource "aws_security_group_rule" "egress_all" {
   type              = "egress"
   from_port         = 0
@@ -104,3 +140,6 @@ resource "aws_security_group_rule" "egress_all" {
   security_group_id = aws_security_group.eks_node_sg.id
   cidr_blocks       = ["0.0.0.0/0"]
 }
+
+
+
