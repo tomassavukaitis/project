@@ -17,7 +17,7 @@ Before running the deployment scripts, make sure you have the following installe
 
 ## ⚙️ Setup Instructions
 
-### 1. Provision Infrastructure
+###  Provision Infrastructure and deploy the apps
 
 Use Terraform to provision the required AWS resources (ECR, IAM roles, etc.):
 
@@ -27,27 +27,32 @@ terraform init
 terraform apply
 This will output the ECR repository URL used by the deployment scripts.
 
-2. Deploy Traefik
+ Deploy Traefik
+
 bash
 bash Automation/deploy-traefik.sh
 This installs Traefik into the hello-ns namespace and exposes it via an AWS LoadBalancer.
 
-3. Deploy Hello App
+ Deploy Hello App
+
 bash
 bash Automation/deploy-hello.sh
 This builds the Hello app image, pushes it to ECR, and deploys it via Helm.
 
-4. Deploy Petclinic App
+ Deploy Petclinic App
+
 bash
 bash Automation/deploy-petclinic.sh
 This builds the Petclinic image, pushes it to ECR, and deploys it via Helm into the petclinic-ns namespace.
 
-🌐 Accessing Services Locally
+ Accessing Services Locally
+
 To access the services via browser, update your local hosts file:
 
 
 <ELB-IP> petclinic.local
 <ELB-IP> hello.local
+
 Replace <ELB-IP> with the public IP or DNS of your AWS LoadBalancer (visible via kubectl get svc traefik -n hello-ns).
 
 Then flush DNS:
