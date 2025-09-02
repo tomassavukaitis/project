@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: hello-ingress
+  namespace: {{ .Release.Namespace }}
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`hello.local`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: hello-service
+          port: {{ .Values.containerPort }}
