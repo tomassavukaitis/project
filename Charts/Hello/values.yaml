@@ -7,3 +7,6 @@ image:
 
 containerPort: 80
 
+
+ingress:
+  host: hello.local
