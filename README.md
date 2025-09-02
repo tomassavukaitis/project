@@ -2,9 +2,6 @@
 
 This repository contains a fully automated setup for deploying two containerized applications — **Spring Petclinic** and a custom **Hello** app — into a Kubernetes cluster using Helm charts. Traffic routing is handled by **Traefik**, and all services are exposed via an **AWS LoadBalancer** with custom hostnames.
 
-## 📂 Project Structure
-
-├── Automation/ # Deployment scripts │ ├── deploy-traefik.sh │ ├── deploy-petclinic.sh │ └── deploy-hello.sh ├── Charts/ # Helm charts for each service │ ├── Hello/ │ ├── Petclinic/ │ └── Traefik/ ├── Images/ # Dockerfiles and build contexts │ ├── Hello/ │ ├── Petclinic/ │ └── Traefik/ ├── Infrastructure/ # Terraform configuration └── README.md
 
 ## 📋 Prerequisites
 
