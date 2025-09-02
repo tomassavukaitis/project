@@ -1,0 +1,18 @@
+traefik:
+  dashboard:
+    enabled: false
+
+ipWhitelist:
+  cidr: "84.15.178.126/32"  # Your home IP
+serviceName: "hello-service"
+servicePort: 80
+
+providers:
+  kubernetesCRD:
+    allowExternal: true
+
+entryPoints:
+  web:
+    address: ":80"
+    forwardedHeaders:
+      insecure: true

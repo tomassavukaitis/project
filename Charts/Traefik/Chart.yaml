@@ -1,0 +1,6 @@
+apiVersion: v2
+name: traefik-setup
+description: IP-whitelist middleware and IngressRoute for Traefik
+type: application
+version: 0.1.0
+appVersion: "2.10"
