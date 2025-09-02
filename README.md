@@ -12,8 +12,6 @@ Before running the deployment scripts, make sure you have the following installe
 - ✅ [Helm](https://helm.sh/)
 - ✅ [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 - ✅ [Terraform](https://developer.hashicorp.com/terraform/downloads)
-- ✅ Access to an AWS ECR repository (configured via Terraform)
-- ✅ A running Kubernetes cluster (e.g. EKS)
 
 ## ⚙️ Setup Instructions
 
