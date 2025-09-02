@@ -6,3 +6,4 @@ image:
   pullPolicy: IfNotPresent
 
 containerPort: 80
+

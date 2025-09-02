@@ -1,0 +1,17 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: hello-ingress
+  namespace: {{ .Release.Namespace }}
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: {{ .Values.serviceName }}
+          port: {{ .Values.servicePort }}
+      middlewares:
+        - name: ip-whitelist
+          namespace: hello-ns

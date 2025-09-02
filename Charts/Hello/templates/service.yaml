@@ -4,8 +4,9 @@ metadata:
   name: hello-service
 spec:
   type: LoadBalancer
+  externalTrafficPolicy: Cluster
   selector:
-    app: hello
+    app: hello-app
   ports:
     - protocol: TCP
       port: 80
