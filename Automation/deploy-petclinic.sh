@@ -7,8 +7,10 @@ IMAGE_NAME="petclinic"
 IMAGE_TAG="petclinic"
 BUILD_CONTEXT="../Images/Petclinic"
 CHART_PATH="../Charts/Petclinic"
+TRAEFIK_CHART_PATH="../Charts/Traefik"
 NAMESPACE="petclinic-ns"
 RELEASE_NAME="petclinic"
+TRAEFIK_RELEASE_NAME="traefik" 
 
 ECR_URI=$(terraform -chdir=../Infrastructure output -raw ecr_repository_url)
 
@@ -39,6 +41,10 @@ else
 fi
 
 kubectl get namespace $NAMESPACE >/dev/null 2>&1 || kubectl create namespace $NAMESPACE
+
+echo "Deploying Traefik"
+helm upgrade --install $TRAEFIK_RELEASE_NAME $TRAEFIK_CHART_PATH \
+  --namespace $NAMESPACE --create-namespace
 
 echo "Deploying Petclinic"
 helm upgrade --install $RELEASE_NAME $CHART_PATH \

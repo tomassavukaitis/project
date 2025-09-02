@@ -25,22 +25,20 @@ terraform init
 terraform apply
 This will output the ECR repository URL used by the deployment scripts.
 
- Deploy Traefik
-
-bash
-bash Automation/deploy-traefik.sh
-This installs Traefik into the hello-ns namespace and exposes it via an AWS LoadBalancer.
-
  Deploy Hello App
 
-bash
-bash Automation/deploy-hello.sh
+```bash
+cd Automation
+./deploy-hello.sh
+
 This builds the Hello app image, pushes it to ECR, and deploys it via Helm.
 
  Deploy Petclinic App
 
-bash
-bash Automation/deploy-petclinic.sh
+```bash
+cd Automation
+./deploy-petclinic.sh
+
 This builds the Petclinic image, pushes it to ECR, and deploys it via Helm into the petclinic-ns namespace.
 
  Accessing Services Locally
@@ -55,5 +53,5 @@ Replace <ELB-IP> with the public IP or DNS of your AWS LoadBalancer (visible via
 
 Then flush DNS:
 
-bash
+```cmd
 ipconfig /flushdns   # Windows
