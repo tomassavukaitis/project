@@ -10,7 +10,7 @@ resource "aws_security_group" "jenkins_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["84.15.178.126/32"]
+    cidr_blocks = [var.allowed_jenkins_cidr]
   }
 
   ingress {
@@ -18,7 +18,7 @@ resource "aws_security_group" "jenkins_sg" {
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
-    cidr_blocks = ["84.15.178.126/32"]
+    cidr_blocks = [var.allowed_jenkins_cidr]
   }
 
   egress {
@@ -53,7 +53,7 @@ resource "aws_security_group_rule" "allow_jenkins_to_eks_api" {
     to_port           = 443
     protocol          = "tcp"
     security_group_id = var.eks_cluster_sg_id
-    cidr_blocks      = ["84.15.178.126/32"]
+    cidr_blocks      = [var.allowed_home_cidr]
     description       = "Allow home IP to access EKS API"
   }
 
@@ -127,7 +127,7 @@ resource "aws_security_group_rule" "allow_home_http_to_eks_nodes" {
   to_port           = 80
   protocol          = "tcp"
   security_group_id = aws_security_group.eks_node_sg.id
-  cidr_blocks       = ["84.15.178.126/32"]
+  cidr_blocks       = [var.allowed_home_cidr]
   description       = "Allow HTTP access from home IP to EKS nodes"
 }
 

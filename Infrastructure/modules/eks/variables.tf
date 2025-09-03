@@ -22,3 +22,8 @@ variable "node_security_group_id" {
   description = "Security group ID to attach to EKS nodes"
   type        = string
 }
+
+variable "instance_type" {
+  description = "Worker node instance type"
+  type        = string
+}
