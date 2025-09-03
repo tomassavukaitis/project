@@ -1,5 +1,5 @@
 resource "aws_vpc" "vpc" {
-  cidr_block           = "10.0.0.0/16"
+  cidr_block           = var.vpc_cidr
 
   tags = {
     Name = "vpc"
@@ -8,9 +8,9 @@ resource "aws_vpc" "vpc" {
 
 resource "aws_subnet" "public_subnet" {
   vpc_id                  = aws_vpc.vpc.id
-  cidr_block              = "10.0.1.0/24"
+  cidr_block              = var.public_subnet_cidrs[0]
   map_public_ip_on_launch = true
-  availability_zone       = "eu-west-1a"
+  availability_zone       = var.azs[0]
 
   tags = {
     Name = "public_subnet"
@@ -18,10 +18,10 @@ resource "aws_subnet" "public_subnet" {
 }
 
 resource "aws_subnet" "private_subnet" {
-  count             = length(var.azs)
-  vpc_id            = aws_vpc.vpc.id
-  cidr_block = var.private_subnet_cidrs[count.index]
-  availability_zone = var.azs[count.index]
+  count                   = length(var.azs)
+  vpc_id                  = aws_vpc.vpc.id
+  cidr_block              = var.private_subnet_cidrs[count.index]
+  availability_zone       = var.azs[count.index]
   map_public_ip_on_launch = false
 
   tags = {

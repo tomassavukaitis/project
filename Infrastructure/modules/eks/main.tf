@@ -39,7 +39,7 @@ resource "aws_eks_node_group" "node_group" {
 
 resource "aws_launch_template" "eks_nodes" {
   name_prefix   = "eks-node-template-"
-  instance_type = "t3.medium"
+  instance_type = var.instance_type
   image_id      = data.aws_ami.eks_worker.id
 
   user_data = base64encode(<<EOF
