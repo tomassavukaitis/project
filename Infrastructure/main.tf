@@ -5,7 +5,7 @@ module "ecr" {
 module "ec2" {
   source             = "./modules/ec2"
   jenkins_sg_id      = module.security_groups.jenkins_sg_id
-  subnet_id          = module.vpc.private_subnet_ids[0]
+  subnet_id          = module.vpc.public_subnet_id 
   ami_id             = var.jenkins_ami_id
   instance_type      = var.jenkins_instance_type
   key_name           = var.jenkins_key_name
