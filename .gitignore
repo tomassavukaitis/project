@@ -1,3 +1,5 @@
 *tfstate* 
 *terraform*
 *.pem
+bootstrap
+backend.tf
